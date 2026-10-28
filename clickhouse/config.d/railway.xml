@@ -1,4 +1,5 @@
 <clickhouse>
+    <listen_host>::</listen_host>
     <logger>
         <level>warning</level>
         <console>true</console>
@@ -22,8 +23,7 @@
     <merges_mutations_memory_usage_to_ram_ratio>0.25</merges_mutations_memory_usage_to_ram_ratio>
     <!-- Railway shows the host's 48 cores; query threads and caches sized from them
          would hold memory a small plan does not have. (background_pool_size stays at
-         its default 16: the merge settings refuse to start below 10.) The image's
-         own config already listens on IPv4 and IPv6. -->
+         its default 16: the merge settings refuse to start below 10.) -->
     <concurrent_threads_soft_limit_num>4</concurrent_threads_soft_limit_num>
     <background_schedule_pool_size>16</background_schedule_pool_size>
     <mark_cache_size>268435456</mark_cache_size>
