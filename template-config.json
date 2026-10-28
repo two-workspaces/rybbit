@@ -1,6 +1,6 @@
 {
   "services": {
-    "68933097-e1fb-46e6-a590-948dcd2e4ffc": {
+    "02407083-054a-4561-8081-9aa82a9e2145": {
       "icon": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
       "name": "Rybbit",
       "build": {
@@ -79,7 +79,7 @@
         }
       }
     },
-    "558bfb47-5598-4ef1-8678-ca55576583ad": {
+    "c4cb1bd0-5850-4a86-bb1b-159814fa6a8a": {
       "icon": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
       "name": "Backend",
       "build": {},
@@ -178,7 +178,7 @@
         "serviceDomains": {}
       }
     },
-    "34bbc602-0996-45ee-be62-eab152d1a83a": {
+    "79857f72-8502-43c7-ac55-e2455bec43ed": {
       "icon": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
       "name": "Client",
       "build": {},
@@ -212,7 +212,7 @@
         "serviceDomains": {}
       }
     },
-    "7b35abff-5d0b-4a84-a190-b902ba5c6312": {
+    "24e89ed7-84cf-470f-9313-689a616af7bf": {
       "icon": "https://devicons.railway.com/i/clickhouse.svg",
       "name": "ClickHouse",
       "build": {
@@ -259,12 +259,12 @@
         "serviceDomains": {}
       },
       "volumeMounts": {
-        "7b35abff-5d0b-4a84-a190-b902ba5c6312": {
+        "24e89ed7-84cf-470f-9313-689a616af7bf": {
           "mountPath": "/var/lib/clickhouse"
         }
       }
     },
-    "593e9e85-813a-45d3-84fa-dd3048240709": {
+    "1720cb42-c1e1-4ac3-b5a5-77453fde455c": {
       "icon": "https://devicons.railway.com/i/postgresql.svg",
       "name": "Postgres",
       "build": {},
@@ -338,12 +338,12 @@
       },
       "networking": {},
       "volumeMounts": {
-        "593e9e85-813a-45d3-84fa-dd3048240709": {
+        "1720cb42-c1e1-4ac3-b5a5-77453fde455c": {
           "mountPath": "/var/lib/postgresql/data"
         }
       }
     },
-    "126aa4fa-90af-4dd7-8e99-7a618f60d4f4": {
+    "8b09b66c-7953-4c28-b901-6fb57c921465": {
       "icon": "https://devicons.railway.com/i/redis.svg",
       "name": "Redis",
       "build": {},
@@ -367,7 +367,7 @@
         "serviceDomains": {}
       },
       "volumeMounts": {
-        "126aa4fa-90af-4dd7-8e99-7a618f60d4f4": {
+        "8b09b66c-7953-4c28-b901-6fb57c921465": {
           "mountPath": "/data"
         }
       }

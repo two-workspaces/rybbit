@@ -1,10 +1,10 @@
 {
   "name": "Rybbit | Privacy-Friendly Google Analytics Alternative",
-  "short_name": "Rybbit v2",
+  "short_name": "Analytics",
   "description": "Rybbit v2.9: cookieless web analytics, funnels, replays on ClickHouse",
   "category": "Analytics",
   "image": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
   "deploy_marker": "two-workspaces/rybbit",
-  "id": "6a0c3570-cd33-466b-bcf2-e8b33182ceaf",
+  "id": "7ff19849-f51e-41e7-9587-babe0982fb5e",
   "published": true
 }

@@ -1,6 +1,6 @@
 # Deploy and Host Rybbit on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/rybbit-v2?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=rybbit-v2)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/analytics?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=analytics)
 
 [Rybbit](https://rybbit.com) is open-source, cookieless web and product analytics: a one-line script gives you live visitors, pages, referrers, countries down to the city, devices, UTM campaigns, goals, funnels, user journeys, retention, web vitals, error tracking and session replay, without a cookie banner. It is a modern Google Analytics or Plausible alternative, and this template runs the full self-hosted stack on Railway with no open signup page.
 
