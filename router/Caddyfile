@@ -1,0 +1,38 @@
+{
+	admin off
+	# Railway's edge terminates TLS and sets X-Real-IP to the visitor (overwriting
+	# whatever the visitor sent); Caddy passes it on and Rybbit's backend reads it
+	# first. X-Forwarded-For would end in an edge hop.
+	servers {
+		trusted_proxies static 100.64.0.0/10
+	}
+}
+
+:{$PORT} {
+	encode zstd gzip
+	request_body {
+		max_size 50MiB
+	}
+	respond /healthz "ok" 200
+
+	# Accounts are made by the admin (Settings > Organization > Create user), or by
+	# public signup only when RYBBIT_PUBLIC_SIGNUP is true.
+	@signup {
+		path /api/auth/sign-up/*
+		expression {$RYBBIT_PUBLIC_SIGNUP:false} != true
+	}
+	respond @signup "Signup is turned off on this Rybbit. Ask an admin to create your account." 403
+
+	handle /api/* {
+		reverse_proxy {$BACKEND_HOST}:3001
+	}
+	handle /.well-known/oauth-* {
+		reverse_proxy {$BACKEND_HOST}:3001
+	}
+	handle /.well-known/openid-configuration* {
+		reverse_proxy {$BACKEND_HOST}:3001
+	}
+	handle {
+		reverse_proxy {$CLIENT_HOST}:3002
+	}
+}

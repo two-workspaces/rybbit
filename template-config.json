@@ -1,0 +1,376 @@
+{
+  "services": {
+    "68933097-e1fb-46e6-a590-948dcd2e4ffc": {
+      "icon": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
+      "name": "Rybbit",
+      "build": {
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": "/healthz",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/two-workspaces/rybbit",
+        "rootDirectory": "/router"
+      },
+      "variables": {
+        "PORT": {
+          "defaultValue": "8080",
+          "description": "Port Caddy listens on - leave as is",
+          "isOptional": false
+        },
+        "BACKEND_HOST": {
+          "defaultValue": "${{Backend.RAILWAY_PRIVATE_DOMAIN}}",
+          "description": "Backend on the private network - leave as is",
+          "isOptional": false
+        },
+        "CLIENT_HOST": {
+          "defaultValue": "${{Client.RAILWAY_PRIVATE_DOMAIN}}",
+          "description": "Dashboard on the private network - leave as is",
+          "isOptional": false
+        },
+        "BASE_URL": {
+          "defaultValue": "${{Backend.BASE_URL}}",
+          "description": "Public address - set it on the Backend service",
+          "isOptional": false
+        },
+        "RYBBIT_ADMIN_EMAIL": {
+          "defaultValue": "admin@example.com",
+          "description": "Login email of the admin account, created on first boot only",
+          "isOptional": false
+        },
+        "RYBBIT_ADMIN_PASSWORD": {
+          "defaultValue": "${{secret(20)}}",
+          "description": "Password of the admin account, set on first boot only - change it in Rybbit afterwards",
+          "isOptional": false
+        },
+        "RYBBIT_PUBLIC_SIGNUP": {
+          "defaultValue": "false",
+          "description": "true lets anyone with the address create an account (and accept email invitations)",
+          "isOptional": false
+        },
+        "PGHOST": {
+          "defaultValue": "${{Postgres.RAILWAY_PRIVATE_DOMAIN}}",
+          "description": "Postgres host, to check for the admin account - leave as is",
+          "isOptional": false
+        },
+        "PGUSER": {
+          "defaultValue": "${{Postgres.POSTGRES_USER}}",
+          "description": "Postgres user - leave as is",
+          "isOptional": false
+        },
+        "PGPASSWORD": {
+          "defaultValue": "${{Postgres.POSTGRES_PASSWORD}}",
+          "description": "Postgres password - leave as is",
+          "isOptional": false
+        },
+        "PGDATABASE": {
+          "defaultValue": "${{Postgres.POSTGRES_DB}}",
+          "description": "Postgres database - leave as is",
+          "isOptional": false
+        }
+      },
+      "networking": {
+        "serviceDomains": {
+          "<hasDomain>": {}
+        }
+      }
+    },
+    "558bfb47-5598-4ef1-8678-ca55576583ad": {
+      "icon": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
+      "name": "Backend",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "ghcr.io/rybbit-io/rybbit-backend:v2.9.2"
+      },
+      "variables": {
+        "NODE_ENV": {
+          "defaultValue": "production",
+          "description": "Leave as is",
+          "isOptional": false
+        },
+        "BASE_URL": {
+          "defaultValue": "https://${{Rybbit.RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Public address. On a custom domain, set it to https://your.domain",
+          "isOptional": false
+        },
+        "BETTER_AUTH_SECRET": {
+          "defaultValue": "${{secret(48)}}",
+          "description": "Signs login sessions",
+          "isOptional": false
+        },
+        "CLICKHOUSE_HOST": {
+          "defaultValue": "http://${{ClickHouse.RAILWAY_PRIVATE_DOMAIN}}:8123",
+          "description": "ClickHouse URL - leave as is",
+          "isOptional": false
+        },
+        "CLICKHOUSE_DB": {
+          "defaultValue": "${{ClickHouse.CLICKHOUSE_DB}}",
+          "description": "ClickHouse database - leave as is",
+          "isOptional": false
+        },
+        "CLICKHOUSE_PASSWORD": {
+          "defaultValue": "${{ClickHouse.CLICKHOUSE_PASSWORD}}",
+          "description": "ClickHouse password - leave as is",
+          "isOptional": false
+        },
+        "POSTGRES_HOST": {
+          "defaultValue": "${{Postgres.RAILWAY_PRIVATE_DOMAIN}}",
+          "description": "Postgres host - leave as is",
+          "isOptional": false
+        },
+        "POSTGRES_PORT": {
+          "defaultValue": "5432",
+          "description": "Postgres port - leave as is",
+          "isOptional": false
+        },
+        "POSTGRES_DB": {
+          "defaultValue": "${{Postgres.POSTGRES_DB}}",
+          "description": "Postgres database - leave as is",
+          "isOptional": false
+        },
+        "POSTGRES_USER": {
+          "defaultValue": "${{Postgres.POSTGRES_USER}}",
+          "description": "Postgres user - leave as is",
+          "isOptional": false
+        },
+        "POSTGRES_PASSWORD": {
+          "defaultValue": "${{Postgres.POSTGRES_PASSWORD}}",
+          "description": "Postgres password - wired to the bundled Postgres",
+          "isOptional": false
+        },
+        "REDIS_HOST": {
+          "defaultValue": "${{Redis.RAILWAY_PRIVATE_DOMAIN}}",
+          "description": "Redis host - leave as is",
+          "isOptional": false
+        },
+        "REDIS_PORT": {
+          "defaultValue": "6379",
+          "description": "Redis port - leave as is",
+          "isOptional": false
+        },
+        "REDIS_PASSWORD": {
+          "defaultValue": "${{Redis.REDIS_PASSWORD}}",
+          "description": "Redis password - leave as is",
+          "isOptional": false
+        },
+        "DISABLE_TELEMETRY": {
+          "defaultValue": "true",
+          "description": "Do not send anonymous usage counts to Rybbit",
+          "isOptional": true
+        },
+        "MAPBOX_TOKEN": {
+          "defaultValue": "",
+          "description": "Mapbox token for the globe view (optional)",
+          "isOptional": true
+        }
+      },
+      "networking": {
+        "serviceDomains": {}
+      }
+    },
+    "34bbc602-0996-45ee-be62-eab152d1a83a": {
+      "icon": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
+      "name": "Client",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "ghcr.io/rybbit-io/rybbit-client:v2.9.2"
+      },
+      "variables": {
+        "NODE_ENV": {
+          "defaultValue": "production",
+          "description": "Leave as is",
+          "isOptional": false
+        },
+        "PORT": {
+          "defaultValue": "3002",
+          "description": "Leave as is",
+          "isOptional": false
+        },
+        "HOSTNAME": {
+          "defaultValue": "::",
+          "description": "Listen on IPv6 and IPv4 - leave as is",
+          "isOptional": false
+        }
+      },
+      "networking": {
+        "serviceDomains": {}
+      }
+    },
+    "7b35abff-5d0b-4a84-a190-b902ba5c6312": {
+      "icon": "https://devicons.railway.com/i/clickhouse.svg",
+      "name": "ClickHouse",
+      "build": {
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/two-workspaces/rybbit",
+        "rootDirectory": "/clickhouse"
+      },
+      "variables": {
+        "CLICKHOUSE_DB": {
+          "defaultValue": "analytics",
+          "description": "Database for the events",
+          "isOptional": false
+        },
+        "CLICKHOUSE_USER": {
+          "defaultValue": "default",
+          "description": "ClickHouse user",
+          "isOptional": false
+        },
+        "CLICKHOUSE_PASSWORD": {
+          "defaultValue": "${{secret(32)}}",
+          "description": "Auto-generated ClickHouse password",
+          "isOptional": false
+        },
+        "CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT": {
+          "defaultValue": "1",
+          "description": "Lets Rybbit create its read-only query user",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "30",
+          "description": "Time for ClickHouse to shut down cleanly",
+          "isOptional": false
+        }
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "volumeMounts": {
+        "7b35abff-5d0b-4a84-a190-b902ba5c6312": {
+          "mountPath": "/var/lib/clickhouse"
+        }
+      }
+    },
+    "593e9e85-813a-45d3-84fa-dd3048240709": {
+      "icon": "https://devicons.railway.com/i/postgresql.svg",
+      "name": "Postgres",
+      "build": {},
+      "deploy": {
+        "requiredMountPath": "/var/lib/postgresql/data"
+      },
+      "source": {
+        "image": "ghcr.io/railwayapp-templates/postgres-ssl:17"
+      },
+      "variables": {
+        "PGDATA": {
+          "defaultValue": "/var/lib/postgresql/data/pgdata",
+          "description": "Location where the database will be initialized",
+          "isOptional": false
+        },
+        "PGHOST": {
+          "defaultValue": "${{RAILWAY_PRIVATE_DOMAIN}}",
+          "description": "Railway Private Domain Name.",
+          "isOptional": false
+        },
+        "PGPORT": {
+          "defaultValue": "5432",
+          "description": "Port to connect to Postgres.",
+          "isOptional": false
+        },
+        "PGUSER": {
+          "defaultValue": "${{ POSTGRES_USER }}",
+          "description": "Required variable for Data panel",
+          "isOptional": false
+        },
+        "PGDATABASE": {
+          "defaultValue": "${{POSTGRES_DB}}",
+          "description": "Required variable for the data panel.",
+          "isOptional": false
+        },
+        "PGPASSWORD": {
+          "defaultValue": "${{POSTGRES_PASSWORD}}",
+          "description": "Required variable for Data panel",
+          "isOptional": false
+        },
+        "POSTGRES_DB": {
+          "defaultValue": "rybbit",
+          "description": "Default database created when image is started.",
+          "isOptional": false
+        },
+        "DATABASE_URL": {
+          "defaultValue": "postgresql://${{PGUSER}}:${{POSTGRES_PASSWORD}}@${{RAILWAY_PRIVATE_DOMAIN}}:5432/${{PGDATABASE}}",
+          "description": "URL to connect to Postgres database.",
+          "isOptional": false
+        },
+        "POSTGRES_USER": {
+          "defaultValue": "postgres",
+          "description": "User to connect to Postgres DB",
+          "isOptional": false
+        },
+        "SSL_CERT_DAYS": {
+          "defaultValue": "820",
+          "description": "SSL certificate expiry in days.",
+          "isOptional": true
+        },
+        "POSTGRES_PASSWORD": {
+          "defaultValue": "${{ secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\") }}",
+          "description": "Password to connect to DB",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Allow Postgres to cleanly shut down",
+          "isOptional": false
+        }
+      },
+      "networking": {},
+      "volumeMounts": {
+        "593e9e85-813a-45d3-84fa-dd3048240709": {
+          "mountPath": "/var/lib/postgresql/data"
+        }
+      }
+    },
+    "126aa4fa-90af-4dd7-8e99-7a618f60d4f4": {
+      "icon": "https://devicons.railway.com/i/redis.svg",
+      "name": "Redis",
+      "build": {},
+      "deploy": {
+        "startCommand": "/bin/sh -c 'exec redis-server --requirepass \"$REDIS_PASSWORD\" --appendonly yes --appendfsync everysec --maxmemory-policy noeviction'",
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "redis:8.6.4-alpine"
+      },
+      "variables": {
+        "REDIS_PASSWORD": {
+          "defaultValue": "${{secret(32)}}",
+          "description": "Auto-generated Redis password",
+          "isOptional": false
+        }
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "volumeMounts": {
+        "126aa4fa-90af-4dd7-8e99-7a618f60d4f4": {
+          "mountPath": "/data"
+        }
+      }
+    }
+  }
+}
