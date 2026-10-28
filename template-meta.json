@@ -3,5 +3,6 @@
   "short_name": "Rybbit v2",
   "description": "Rybbit v2.9: cookieless web analytics, funnels, replays on ClickHouse",
   "category": "Analytics",
-  "image": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg"
+  "image": "https://raw.githubusercontent.com/rybbit-io/rybbit/master/client/public/rybbit/frog_light%20green.svg",
+  "deploy_marker": "two-workspaces/rybbit"
 }
